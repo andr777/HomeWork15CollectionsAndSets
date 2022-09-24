@@ -1,23 +1,30 @@
 package pro.sky.HomeWork15CollectionsAndSets.Service;
 
 import org.springframework.stereotype.Service;
+
 import java.lang.String;
+
 @Service
 public class Employee {
-    private static String firstName ;         // фамилия
-    private static String lastName;            // имя
+   private String firstName;         // фамилия
+    private String lastName;            // имя
 
     public Employee() {
         this(null, null);
     }
 
-    public Employee(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Employee(String fName, String lName) {
+        this.firstName = fName;
+        this.lastName = lName;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     public void setFirstName(String firstName) {
@@ -25,7 +32,7 @@ public class Employee {
     }
 
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
 
     public void setLastName(String lastName) {
@@ -33,27 +40,25 @@ public class Employee {
     }
 
     @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Employee employee = (Employee) obj;
+
+        return this.firstName.equals(employee.getFirstName()) && this.lastName.equals(employee.getLastName());
+
+
+
+
+    }
+
+    @Override
     public String toString() {
-        return '\n' +"<br> Фамилия='" + firstName + '\'' +
-                ", Имя='" + lastName +  '\''   ;
+        return this.firstName+", "+this.lastName;
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        Employee employee = (Employee) o;
-
-        if (!firstName.equals(employee.firstName)) return false;
-        return lastName.equals(employee.lastName);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = firstName.hashCode();
-        result = 31 * result + lastName.hashCode();
-        return result;
-    }
 }
